@@ -1,0 +1,19 @@
+node_modules/
+logs/
+run/
+
+.DS_Store
+
+dist/
+.dist/
+.serverless/
+
+config.local.ts
+
+/node_modules
+/npm-debug.log*
+yarn.lock
+package-lock.json
+
+# misc
+.DS_Store
