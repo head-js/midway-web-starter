@@ -1,0 +1,45 @@
+{
+  "name": "egg-web-starter",
+  "version": "0.4.0",
+  "description": "",
+  "eggPlugin": {
+    "name": "web-starter"
+  },
+  "keywords": [
+    "egg",
+    "egg-plugin",
+    "egg-web-starter"
+  ],
+  "dependencies": {
+    "syncrequest": "1.4.7"
+  },
+  "devDependencies": {
+    "@eggjs/http-proxy": "1.1.0",
+    "egg": "2.26.0",
+    "egg-bin": "4.9.0",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "14.1.0",
+    "gulp": "4.0.2",
+    "gulp-replace": "1.0.0",
+    "jsonwebtoken": "8.4.0",
+    "le_node": "1.7.1",
+    "vanilla.js": "0.2.3"
+  },
+  "peerDependencies": {
+    "gulp": "*",
+    "gulp-replace": "*",
+    "le_node": "*"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-bin dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/head-js/web-starter"
+  },
+  "author": "Albert Hbrls<shuaizhexu@gmail.com>",
+  "license": "MIT"
+}
