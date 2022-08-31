@@ -1,11 +1,17 @@
-import { join } from 'path';
-import { Configuration, App } from '@midwayjs/decorator';
-import { Application } from 'egg';
+import { Configuration, App, Inject } from '@midwayjs/decorator';
+import { Application } from '@midwayjs/koa';
+import { NunjucksEnvironment } from '@midwayjs/view-nunjucks';
+import * as DefaultConfig from './config/config.default';
+import * as PrdConfig from './config/config.prd';
 
 
 @Configuration({
+  namespace: 'web-starter',
   importConfigs: [
-    join(__dirname, 'config')
+    {
+      default: DefaultConfig,
+      prd: PrdConfig,
+    },
   ]
 })
 export class MWSConfiguration {
@@ -13,19 +19,16 @@ export class MWSConfiguration {
   @App()
   app: Application;
 
+  @Inject()
+  view: NunjucksEnvironment;
+
   async onReady() {
-    const { props = {} } = this.app.config;
+    const starter = this.app.getConfig('web-starter');
 
-    const mode = process.env.NODE_ENV || 'development';
-    this.app.locals.__mode__ = mode;
-
-    const profile = this.app.config.env || 'local';
-    this.app.locals.__profile__ = profile;
-
-    const version = props['web.starter.version'] || '1.0.';
-    this.app.locals.__version__ = version;
-
-    const api = props['web.starter.api'] || '/api';
-    this.app.locals.__api__ = api;
+    this.view.addGlobal('__mode__', starter.mode);
+    this.view.addGlobal('__profile__', starter.profile.active);
+    const { svc } = starter.profile;
+    this.view.addGlobal('__profile_vars__', JSON.stringify({ svc }));
+    this.view.addGlobal('__version__', starter.version);
   }
 }
