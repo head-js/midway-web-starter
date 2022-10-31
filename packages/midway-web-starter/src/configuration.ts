@@ -1,6 +1,7 @@
-import { Configuration, App, Inject } from '@midwayjs/decorator';
+import { Configuration, App, Inject } from '@midwayjs/core';
 import { Application } from '@midwayjs/koa';
 import { NunjucksEnvironment } from '@midwayjs/view-nunjucks';
+import initHelper from './helper/index';
 import * as DefaultConfig from './config/config.default';
 import * as PrdConfig from './config/config.prd';
 
@@ -24,6 +25,11 @@ export class MWSConfiguration {
 
   async onReady() {
     const starter = this.app.getConfig('web-starter');
+
+    this.view.addGlobal('helper', initHelper({
+      staticFilePrefix: this.app.getConfig('staticFile.dirs.default.prefix'),
+      profile: this.app.getConfig('web-starter.profile'),
+    }));
 
     this.view.addGlobal('__mode__', starter.mode);
     this.view.addGlobal('__profile__', starter.profile.active);

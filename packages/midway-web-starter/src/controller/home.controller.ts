@@ -1,6 +1,5 @@
-import { App, Provide, Inject, Controller, Get, Param } from '@midwayjs/decorator';
+import { App, Provide, Inject, Controller, Get, Param, MidwayHttpError, HttpStatus } from '@midwayjs/core';
 import { Application, Context } from '@midwayjs/koa';
-import { MidwayHttpError, HttpStatus } from '@midwayjs/core';
 
 
 @Provide()
